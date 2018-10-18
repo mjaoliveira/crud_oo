@@ -3,28 +3,32 @@ require 'contato.class.php';
 
 $contato = new Contato();
 
-//CREATE
-//$contato->adicionar('marcelojorge_ba@hotmail.com', 'Marcelo Jorge');
-//$contato->adicionar('fulano@gmail.com');
+?>
 
-//READ
-//$nome = $contato->getNome('marcelojorge_ba@hotmail.com');
-//echo "Nome: ".$nome;
+<h1>Contatos</h1>
 
-//$lista = $contato->getAll();
+<a href="adicionar.php">[ ADICIONAR ]</a><br/><br/>
 
-//print_r($lista);
+<table border='1' width="600">
+	<tr>
+		<th>ID</th>
+		<th>NOME</th>
+		<th>EMAIL</th>
+		<th>ACOES</th>
+	</tr>
 
-//UPDATE
-//$contato->editar('Fulano', 'fulano@gmail.com');
-
-//DELETE
-/*$excluir = $contato->excluir('fulano@gmail.com');
-
-if ($excluir == true) {
-	echo 'Foi Excluido!';
-} else{
-	echo 'N foi excluido';
-}
-*/
-
+	<?php
+	$lista = $contato->getAll();
+	foreach ($lista as $item):
+	?>
+	<tr>
+		<td><?php echo $item['id'];?></td>
+		<td><?php echo $item['nome'];?></td>
+		<td><?php echo $item['email'];?></td>
+		<td>
+			<a href="editar.php?id=<?php echo $item['id']; ?>">[ EDITAR ]</a>
+			<a href="excluir.php?id=<?php echo $item['id']; ?>">[ EXCLUIR ]</a>
+		</td>
+	</tr>
+<?php endforeach; ?>
+</table>
